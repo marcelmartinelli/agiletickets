@@ -51,7 +51,6 @@ public class EspetaculosController {
 		// se nao tiver nome, avisa o usuario
 		// se nao tiver descricao, avisa o usuario
 		validaEspetaculo(espetaculo);
-		validator.onErrorRedirectTo(this).lista();
 		agenda.cadastra(espetaculo);
 		result.redirectTo(this).lista();
 	}
@@ -62,7 +61,8 @@ public class EspetaculosController {
 		}
 		if (Strings.isNullOrEmpty(espetaculo.getDescricao())) {
 			validator.add(new ValidationMessage("Descricao do espetaculo nao pode estar em branco", ""));
-		}		
+		}
+		validator.onErrorRedirectTo(this).lista();
 	}
 
 
@@ -83,12 +83,7 @@ public class EspetaculosController {
 			result.notFound();
 			return;
 		}
-
 		validaSessao(quantidade, sessao);
-
-		// em caso de erro, redireciona para a lista de sessao
-		validator.onErrorRedirectTo(this).sessao(sessao.getId());
-
 		sessao.reserva(quantidade);
 		result.include("message", "Sessao reservada com sucesso");
 
@@ -103,6 +98,8 @@ public class EspetaculosController {
 		if (!sessao.podeReservar(quantidade)) {
 			validator.add(new ValidationMessage("Nao existem ingressos dispon√≠veis", ""));
 		}
+		// em caso de erro, redireciona para a lista de sessao
+		validator.onErrorRedirectTo(this).sessao(sessao.getId());
 	}
 
 	@Get @Path("/espetaculo/{espetaculoId}/sessoes")
