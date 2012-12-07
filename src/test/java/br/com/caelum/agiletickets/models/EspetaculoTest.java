@@ -3,7 +3,6 @@ package br.com.caelum.agiletickets.models;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.joda.time.LocalDate;

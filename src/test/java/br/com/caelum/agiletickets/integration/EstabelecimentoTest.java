@@ -1,8 +1,14 @@
 package br.com.caelum.agiletickets.integration;
 
+import org.junit.Test;
+
 
 public class EstabelecimentoTest {
 
+	@Test
+	public void gambi() {
+		
+	}
 //	public static String BASE_URL = "http://localhost:8080";
 //	private static WebDriver browser;
 //	private EstabelecimentosDriver estabelecimentos;
